@@ -25,7 +25,7 @@ impl Entity {
     }
 
     pub fn move_up(&mut self) {
-        if borrow_cell!(self.reference()).up.is_some() {
+        if borrow_cell!(self.reference()).check_up() {
             println!("Can move up");
             mut_cell!(self.reference()).entity = None;
             self.set_cell(borrow_cell!(self.reference()).up.clone());
@@ -33,7 +33,7 @@ impl Entity {
         }
     }
     pub fn move_down(&mut self) {
-        if borrow_cell!(self.reference()).down.is_some() {
+        if borrow_cell!(self.reference()).check_down() {
             println!("Can move down");
             mut_cell!(self.reference()).entity = None;
             self.set_cell(borrow_cell!(self.reference()).down.clone());
@@ -41,7 +41,7 @@ impl Entity {
         }
     }
     pub fn move_left(&mut self) {
-        if borrow_cell!(self.reference()).left.is_some() {
+        if borrow_cell!(self.reference()).check_left() {
             println!("Can move left");
             mut_cell!(self.reference()).entity = None;
             self.set_cell(borrow_cell!(self.reference()).left.clone());
@@ -49,7 +49,7 @@ impl Entity {
         }
     }
     pub fn move_right(&mut self) {
-        if borrow_cell!(self.reference()).right.is_some() {
+        if borrow_cell!(self.reference()).check_right() {
             println!("Can move right");
             mut_cell!(self.reference()).entity = None;
             self.set_cell(borrow_cell!(self.reference()).right.clone());

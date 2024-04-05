@@ -2,6 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
+use crate::util::borrow_cell;
 use crate::{entity::Entity, CHAR_SIZE};
 
 #[derive(Clone, Debug)]
@@ -27,6 +28,38 @@ impl Cell {
             right: None,
         };
         Rc::new(RefCell::new(c))
+    }
+
+    pub fn check_up(&self) -> bool {
+        if self.up.is_some() {
+            return self.up.clone().unwrap().as_ref().borrow().available();
+        }
+        return false;
+    }
+    pub fn check_down(&self) -> bool {
+        if self.down.is_some() {
+            return self.down.clone().unwrap().as_ref().borrow().available();
+        }
+        return false;
+    }
+    pub fn check_left(&self) -> bool {
+        if self.left.is_some() {
+            return self.left.clone().unwrap().as_ref().borrow().available();
+        }
+        return false;
+    }
+    pub fn check_right(&self) -> bool {
+        if self.right.is_some() {
+            return self.right.clone().unwrap().as_ref().borrow().available();
+        }
+        return false;
+    }
+
+    pub fn available(&self) -> bool {
+        if self.entity.is_some() {
+            return false;
+        }
+        return true;
     }
 
     pub fn draw(&self, font: &Font, d: &mut RaylibDrawHandle) {

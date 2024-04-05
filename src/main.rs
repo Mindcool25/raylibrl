@@ -7,7 +7,7 @@ pub mod util;
 
 use crate::entity::Entity;
 use crate::map::Map;
-use crate::util::{borrow_cell, mut_cell, mut_ref};
+use crate::util::mut_ref;
 
 static CELL_AMOUNT: i32 = 200;
 
@@ -21,6 +21,9 @@ fn main() {
         .expect("Failed to laod font");
 
     let e = Entity::new();
+    let e2 = Entity::new();
+
+    mut_ref!(e2).disp = 'E';
 
     let m: Map = Map::new();
     m.init_cells();
@@ -28,24 +31,27 @@ fn main() {
     mut_ref!(m.map[0].clone()).entity = Some(e.clone());
     mut_ref!(e).cell = Some(m.map[0].clone());
 
+    mut_ref!(m.map[3].clone()).entity = Some(e2.clone());
+    mut_ref!(e2).cell = Some(m.map[3].clone());
+
     use raylib::consts::KeyboardKey::*;
     while !rl.window_should_close() {
         //
         // INPUT HANDLING
         //
-        if rl.is_key_pressed(KEY_UP) {
+        if rl.is_key_pressed(KEY_K) {
             println!("UP");
             mut_ref!(e).move_up();
         }
-        if rl.is_key_pressed(KEY_DOWN) {
+        if rl.is_key_pressed(KEY_J) {
             println!("DOWN");
             mut_ref!(e).move_down();
         }
-        if rl.is_key_pressed(KEY_RIGHT) {
+        if rl.is_key_pressed(KEY_L) {
             println!("RIGHT");
             mut_ref!(e).move_right();
         }
-        if rl.is_key_pressed(KEY_LEFT) {
+        if rl.is_key_pressed(KEY_H) {
             println!("LEFT");
             mut_ref!(e).move_left();
         }
