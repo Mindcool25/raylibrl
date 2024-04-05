@@ -13,46 +13,48 @@ impl Map {
     pub fn new() -> Map {
         let mut new_map: Map = Map { map: Vec::new() };
 
-        let mut curr_pos = Vector2::new(30.0, 30.0);
+        let mut curr_pos = Vector2::new(15.0, 15.0);
 
         for _ in 0..CELL_AMOUNT {
-            let c = Cell::new('#');
-            mut_ref!(c).pos = match get_random_value(0, 3) {
+            let new_pos: Vector2 = match get_random_value(0, 3) {
                 0 => {
                     if new_map.is_occupied(Vector2::new(curr_pos.x + 1.0, curr_pos.y)) {
-                        continue;
-                    } else {
-                        curr_pos.x += 1.0;
                         curr_pos
+                    } else {
+                        Vector2::new(curr_pos.x + 1.0, curr_pos.y)
                     }
                 }
                 1 => {
                     if new_map.is_occupied(Vector2::new(curr_pos.x - 1.0, curr_pos.y)) {
-                        continue;
-                    } else {
-                        curr_pos.x -= 1.0;
                         curr_pos
+                    } else {
+                        Vector2::new(curr_pos.x - 1.0, curr_pos.y)
                     }
                 }
                 2 => {
                     if new_map.is_occupied(Vector2::new(curr_pos.x, curr_pos.y + 1.0)) {
-                        continue;
-                    } else {
-                        curr_pos.y += 1.0;
                         curr_pos
+                    } else {
+                        Vector2::new(curr_pos.x, curr_pos.y - 1.0)
                     }
                 }
                 3 => {
                     if new_map.is_occupied(Vector2::new(curr_pos.x, curr_pos.y + 1.0)) {
-                        continue;
-                    } else {
-                        curr_pos.y -= 1.0;
                         curr_pos
+                    } else {
+                        Vector2::new(curr_pos.x, curr_pos.y + 1.0)
                     }
                 }
                 _ => curr_pos,
             };
-            new_map.map.push(c);
+            if new_pos != curr_pos {
+                if !new_map.is_occupied(new_pos) {
+                    let new_cell = Cell::new('#');
+                    mut_ref!(new_cell).pos = new_pos;
+                    new_map.map.push(new_cell);
+                    curr_pos = new_pos;
+                }
+            }
         }
         println!("Map?? : {:?}", new_map);
         new_map
