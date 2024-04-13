@@ -21,9 +21,8 @@ fn main() {
         .expect("Failed to laod font");
 
     let e = Entity::new();
-    let e2 = Entity::new();
 
-    mut_ref!(e2).disp = 'E';
+    let e2 = Entity::create('e', Color::BEIGE);
 
     let m: Map = Map::new();
     m.init_cells();

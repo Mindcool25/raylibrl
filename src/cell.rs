@@ -2,7 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
-use crate::util::borrow_cell;
+use crate::util::{borrow, borrow_cell};
 use crate::{entity::Entity, CHAR_SIZE};
 
 #[derive(Clone, Debug)]
@@ -66,19 +66,14 @@ impl Cell {
         if self.entity.is_some() {
             d.draw_text_ex(
                 font,
-                self.entity
-                    .as_ref()
-                    .unwrap()
-                    .clone()
-                    .as_ref()
-                    .borrow()
+                borrow!(self.entity.clone().unwrap())
                     .disp
                     .to_string()
                     .as_str(),
                 self.pos.scale_by(CHAR_SIZE),
                 CHAR_SIZE,
                 0.0,
-                Color::WHITE,
+                borrow!(self.entity.clone().unwrap()).color,
             );
         } else {
             d.draw_text_ex(

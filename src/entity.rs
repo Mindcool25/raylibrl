@@ -1,5 +1,7 @@
 use std::{borrow::BorrowMut, cell::RefCell, rc::Rc};
 
+use raylib::prelude::*;
+
 use crate::{
     cell::Cell,
     util::{borrow, borrow_cell, mut_cell},
@@ -9,6 +11,7 @@ use crate::{
 pub struct Entity {
     pub cell: Option<Rc<RefCell<Cell>>>,
     pub disp: char,
+    pub color: Color,
 }
 
 impl Entity {
@@ -16,6 +19,16 @@ impl Entity {
         let e = Entity {
             cell: None,
             disp: '@',
+            color: Color::WHITE,
+        };
+        return Rc::new(RefCell::new(e));
+    }
+
+    pub fn create(disp: char, color: Color) -> Rc<RefCell<Entity>> {
+        let e = Entity {
+            cell: None,
+            disp,
+            color,
         };
         return Rc::new(RefCell::new(e));
     }
