@@ -7,7 +7,7 @@ pub mod util;
 
 use crate::entity::Entity;
 use crate::map::Map;
-use crate::util::mut_ref;
+use crate::util::{borrow_cell, mut_ref};
 
 static CELL_AMOUNT: i32 = 200;
 
@@ -17,7 +17,7 @@ fn main() {
     let (mut rl, thread) = raylib::init().size(640, 480).title("raylib RL").build();
 
     let font = rl
-        .load_font(&thread, "./assets/Px437_IBM_EGA_8x8.ttf")
+        .load_font(&thread, "./assets/BungeeSpice-Regular.ttf")
         .expect("Failed to laod font");
 
     let e = Entity::new();
@@ -39,20 +39,36 @@ fn main() {
         // INPUT HANDLING
         //
         if rl.is_key_pressed(KEY_K) {
-            println!("UP");
-            mut_ref!(e).move_up();
+            mut_ref!(e).move_north();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
         }
         if rl.is_key_pressed(KEY_J) {
-            println!("DOWN");
-            mut_ref!(e).move_down();
+            mut_ref!(e).move_south();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
         }
         if rl.is_key_pressed(KEY_L) {
-            println!("RIGHT");
-            mut_ref!(e).move_right();
+            mut_ref!(e).move_east();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
         }
         if rl.is_key_pressed(KEY_H) {
-            println!("LEFT");
-            mut_ref!(e).move_left();
+            mut_ref!(e).move_west();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
+        }
+        if rl.is_key_pressed(KEY_U) {
+            mut_ref!(e).move_ne();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
+        }
+        if rl.is_key_pressed(KEY_Y) {
+            mut_ref!(e).move_nw();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
+        }
+        if rl.is_key_pressed(KEY_B) {
+            mut_ref!(e).move_sw();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
+        }
+        if rl.is_key_pressed(KEY_N) {
+            mut_ref!(e).move_se();
+            println!("Current Cell: {:?}", borrow_cell!(e).pos);
         }
 
         //

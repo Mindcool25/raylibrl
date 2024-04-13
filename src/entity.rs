@@ -1,10 +1,10 @@
-use std::{borrow::BorrowMut, cell::RefCell, rc::Rc};
+use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
 use crate::{
     cell::Cell,
-    util::{borrow, borrow_cell, mut_cell},
+    util::{borrow_cell, mut_cell},
 };
 
 #[derive(Clone, Debug)]
@@ -37,35 +37,63 @@ impl Entity {
         self.cell = c;
     }
 
-    pub fn move_up(&mut self) {
-        if borrow_cell!(self.reference()).check_up() {
-            println!("Can move up");
+    pub fn move_north(&mut self) {
+        if borrow_cell!(self.reference()).check_north() {
             mut_cell!(self.reference()).entity = None;
-            self.set_cell(borrow_cell!(self.reference()).up.clone());
+            self.set_cell(borrow_cell!(self.reference()).north.clone());
             mut_cell!(self.reference()).entity = Some(self.reference());
         }
     }
-    pub fn move_down(&mut self) {
-        if borrow_cell!(self.reference()).check_down() {
-            println!("Can move down");
+    pub fn move_south(&mut self) {
+        if borrow_cell!(self.reference()).check_south() {
             mut_cell!(self.reference()).entity = None;
-            self.set_cell(borrow_cell!(self.reference()).down.clone());
+            self.set_cell(borrow_cell!(self.reference()).south.clone());
             mut_cell!(self.reference()).entity = Some(self.reference());
         }
     }
-    pub fn move_left(&mut self) {
-        if borrow_cell!(self.reference()).check_left() {
-            println!("Can move left");
+    pub fn move_west(&mut self) {
+        if borrow_cell!(self.reference()).check_west() {
             mut_cell!(self.reference()).entity = None;
-            self.set_cell(borrow_cell!(self.reference()).left.clone());
+            self.set_cell(borrow_cell!(self.reference()).west.clone());
             mut_cell!(self.reference()).entity = Some(self.reference());
         }
     }
-    pub fn move_right(&mut self) {
-        if borrow_cell!(self.reference()).check_right() {
-            println!("Can move right");
+    pub fn move_east(&mut self) {
+        if borrow_cell!(self.reference()).check_east() {
             mut_cell!(self.reference()).entity = None;
-            self.set_cell(borrow_cell!(self.reference()).right.clone());
+            self.set_cell(borrow_cell!(self.reference()).east.clone());
+            mut_cell!(self.reference()).entity = Some(self.reference());
+        }
+    }
+
+    pub fn move_ne(&mut self) {
+        if borrow_cell!(self.reference()).check_ne() {
+            mut_cell!(self.reference()).entity = None;
+            self.set_cell(borrow_cell!(self.reference()).ne.clone());
+            mut_cell!(self.reference()).entity = Some(self.reference());
+        }
+    }
+
+    pub fn move_nw(&mut self) {
+        if borrow_cell!(self.reference()).check_nw() {
+            mut_cell!(self.reference()).entity = None;
+            self.set_cell(borrow_cell!(self.reference()).nw.clone());
+            mut_cell!(self.reference()).entity = Some(self.reference());
+        }
+    }
+
+    pub fn move_se(&mut self) {
+        if borrow_cell!(self.reference()).check_se() {
+            mut_cell!(self.reference()).entity = None;
+            self.set_cell(borrow_cell!(self.reference()).se.clone());
+            mut_cell!(self.reference()).entity = Some(self.reference());
+        }
+    }
+
+    pub fn move_sw(&mut self) {
+        if borrow_cell!(self.reference()).check_sw() {
+            mut_cell!(self.reference()).entity = None;
+            self.set_cell(borrow_cell!(self.reference()).sw.clone());
             mut_cell!(self.reference()).entity = Some(self.reference());
         }
     }

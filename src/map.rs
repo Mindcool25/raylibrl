@@ -63,10 +63,14 @@ impl Map {
     pub fn init_cells(&self) {
         for cell in &self.map {
             let pos = borrow!(cell).pos;
-            mut_ref!(cell).up = self.get_cell(Vector2::new(pos.x, pos.y - 1.0));
-            mut_ref!(cell).down = self.get_cell(Vector2::new(pos.x, pos.y + 1.0));
-            mut_ref!(cell).left = self.get_cell(Vector2::new(pos.x - 1.0, pos.y));
-            mut_ref!(cell).right = self.get_cell(Vector2::new(pos.x + 1.0, pos.y));
+            mut_ref!(cell).north = self.get_cell(Vector2::new(pos.x, pos.y - 1.0));
+            mut_ref!(cell).south = self.get_cell(Vector2::new(pos.x, pos.y + 1.0));
+            mut_ref!(cell).east = self.get_cell(Vector2::new(pos.x + 1.0, pos.y));
+            mut_ref!(cell).west = self.get_cell(Vector2::new(pos.x - 1.0, pos.y));
+            mut_ref!(cell).ne = self.get_cell(Vector2::new(pos.x + 1.0, pos.y - 1.0));
+            mut_ref!(cell).nw = self.get_cell(Vector2::new(pos.x - 1.0, pos.y - 1.0));
+            mut_ref!(cell).se = self.get_cell(Vector2::new(pos.x + 1.0, pos.y + 1.0));
+            mut_ref!(cell).sw = self.get_cell(Vector2::new(pos.x - 1.0, pos.y + 1.0));
         }
     }
 
