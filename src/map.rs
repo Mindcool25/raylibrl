@@ -56,7 +56,6 @@ impl Map {
                 }
             }
         }
-        println!("Map?? : {:?}", new_map);
         new_map
     }
 

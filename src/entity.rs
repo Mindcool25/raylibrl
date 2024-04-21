@@ -1,17 +1,22 @@
+use std::fmt;
+
 use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
-use crate::{
-    cell::Cell,
-    util::{borrow_cell, mut_cell},
-};
+use crate::util::{borrow_cell, mut_cell, CellRef};
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct Entity {
-    pub cell: Option<Rc<RefCell<Cell>>>,
+    pub cell: CellRef,
     pub disp: char,
     pub color: Color,
+}
+
+impl fmt::Debug for Entity {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("Entity").field("disp", &self.disp).finish()
+    }
 }
 
 impl Entity {
@@ -33,7 +38,7 @@ impl Entity {
         return Rc::new(RefCell::new(e));
     }
 
-    pub fn set_cell(&mut self, c: Option<Rc<RefCell<Cell>>>) {
+    pub fn set_cell(&mut self, c: CellRef) {
         self.cell = c;
     }
 
@@ -100,5 +105,13 @@ impl Entity {
 
     pub fn reference(&self) -> Rc<RefCell<Entity>> {
         return Rc::new(RefCell::new(self.clone()));
+    }
+
+    pub fn touch(&self) {
+        println!("OW! from: {}", self.disp);
+    }
+
+    pub fn turn() {
+        return;
     }
 }

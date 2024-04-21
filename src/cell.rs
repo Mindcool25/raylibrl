@@ -2,25 +2,22 @@ use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
-<<<<<<< HEAD
-use crate::util::{borrow, borrow_cell};
-=======
->>>>>>> 067f9ff39b7e0dd835194082bf733e6c2ecaa9ad
-use crate::{entity::Entity, CHAR_SIZE};
+use crate::util::{borrow, BorrowCell, CellRef, EntityRef};
+use crate::CHAR_SIZE;
 
 #[derive(Clone, Debug)]
 pub struct Cell {
-    pub entity: Option<Rc<RefCell<Entity>>>,
+    pub entity: EntityRef,
     pub disp: char,
     pub pos: Vector2,
-    pub north: Option<Rc<RefCell<Cell>>>,
-    pub south: Option<Rc<RefCell<Cell>>>,
-    pub west: Option<Rc<RefCell<Cell>>>,
-    pub east: Option<Rc<RefCell<Cell>>>,
-    pub ne: Option<Rc<RefCell<Cell>>>,
-    pub nw: Option<Rc<RefCell<Cell>>>,
-    pub se: Option<Rc<RefCell<Cell>>>,
-    pub sw: Option<Rc<RefCell<Cell>>>,
+    pub north: CellRef,
+    pub south: CellRef,
+    pub west: CellRef,
+    pub east: CellRef,
+    pub ne: CellRef,
+    pub nw: CellRef,
+    pub se: CellRef,
+    pub sw: CellRef,
 }
 
 impl Cell {
@@ -43,53 +40,53 @@ impl Cell {
 
     pub fn check_north(&self) -> bool {
         if self.north.is_some() {
-            return self.north.clone().unwrap().as_ref().borrow().available();
+            return self.north.clone().borrow_ref().available();
         }
         return false;
     }
     pub fn check_south(&self) -> bool {
         if self.south.is_some() {
-            return self.south.clone().unwrap().as_ref().borrow().available();
+            return self.south.clone().borrow_ref().available();
         }
         return false;
     }
     pub fn check_west(&self) -> bool {
         if self.west.is_some() {
-            return self.west.clone().unwrap().as_ref().borrow().available();
+            return self.west.clone().borrow_ref().available();
         }
         return false;
     }
     pub fn check_east(&self) -> bool {
         if self.east.is_some() {
-            return self.east.clone().unwrap().as_ref().borrow().available();
+            return self.east.clone().borrow_ref().available();
         }
         return false;
     }
 
     pub fn check_ne(&self) -> bool {
         if self.ne.is_some() {
-            return self.ne.clone().unwrap().as_ref().borrow().available();
+            return self.ne.clone().borrow_ref().available();
         }
         return false;
     }
 
     pub fn check_nw(&self) -> bool {
         if self.nw.is_some() {
-            return self.nw.clone().unwrap().as_ref().borrow().available();
+            return self.nw.clone().borrow_ref().available();
         }
         return false;
     }
 
     pub fn check_se(&self) -> bool {
         if self.se.is_some() {
-            return self.se.clone().unwrap().as_ref().borrow().available();
+            return self.se.clone().borrow_ref().available();
         }
         return false;
     }
 
     pub fn check_sw(&self) -> bool {
         if self.sw.is_some() {
-            return self.sw.clone().unwrap().as_ref().borrow().available();
+            return self.sw.clone().borrow_ref().available();
         }
         return false;
     }
