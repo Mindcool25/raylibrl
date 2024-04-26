@@ -33,18 +33,12 @@ macro_rules! mut_cell {
 }
 pub(crate) use {borrow, borrow_cell, mut_cell, mut_ref};
 
-pub trait BorrowCell {
-    fn borrow_ref(self) -> Cell;
-    fn mut_ref(self) -> Cell;
+pub trait BorrowObj<T> {
+    fn borrow_ref(self) -> T;
+    fn mut_ref(self) -> T;
 }
 
-pub trait BorrowEntity {
-    fn borrow_ref(self) -> Entity;
-    fn mut_ref(self) -> Entity;
-}
-
-pub type CellRef = Option<Rc<RefCell<Cell>>>;
-pub type EntityRef = Option<Rc<RefCell<Entity>>>;
+pub type GameObject<T> = Option<Rc<RefCell<T>>>;
 
 impl BorrowCell for CellRef {
     fn borrow_ref(self) -> Cell {
@@ -52,16 +46,6 @@ impl BorrowCell for CellRef {
     }
 
     fn mut_ref(self) -> Cell {
-        self.clone().unwrap().as_ref().borrow_mut().clone()
-    }
-}
-
-impl BorrowEntity for EntityRef {
-    fn borrow_ref(self) -> Entity {
-        self.clone().unwrap().as_ref().borrow().clone()
-    }
-
-    fn mut_ref(self) -> Entity {
         self.clone().unwrap().as_ref().borrow_mut().clone()
     }
 }

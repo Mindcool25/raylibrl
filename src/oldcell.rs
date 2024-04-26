@@ -2,7 +2,7 @@ use std::{cell::RefCell, rc::Rc};
 
 use raylib::prelude::*;
 
-use crate::util::{borrow, BorrowCell, CellRef, EntityRef};
+use crate::util;
 use crate::CHAR_SIZE;
 
 #[derive(Clone, Debug)]
