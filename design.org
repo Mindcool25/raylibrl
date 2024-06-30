@@ -1,0 +1,29 @@
+#+title: Design Document
+#+author: mindcool
+#+options: toc:2
+
+* Introduction
+** Pitch
+{{name here}} is a classic roguelike that focuses on modifying the player character with augments to give them a better chance with the enemies.
+
+** Inspirations
+*** CDDA
+Also known as Cataclysm: Dark Days Ahead, CDDA is a classic roguelike that incorporates survival elements to classic roguelike formula. It also has a mechanic that allows you to add things to your body to enhance your skills and make survival easier, but can also fail and put you into a bad situation.
+*** PREY
+Main mechanic for inspiration is the augments within the game. There are two categories of these augments, the human ones and alien ones. Using the alien ones will slowly make you more detectable as an alien to the security systems within the space station you are in.
+*** Quasimorph
+Extraction shooter style of gameplay as a classic roguelike, with missions to planets and other ships.
+*** Cogmind
+Mainly the easy to parse UI and low bar to entry for graphics.
+
+* Overview
+** Theme/Genere
+Traditional roguelike set in space
+** Core Gameplay Mechanics
+- Base management?
+- Mission based levels
+- Turn based combat
+- Resource Management
+- Player augment management
+** Brief Description
+{{name here}} is a game that takes inspiration from
